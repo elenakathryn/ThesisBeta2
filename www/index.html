@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="format-detection" content="telephone-no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, minimum-scale=1, maximum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi">
+    <title>Thesis Beta</title>
+    <link rel="stylesheet" href="css/themes/default/jquery.mobile-1.2.0.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+    
+    <!-- core -->
+    <script type="text/javascript" src="cordova-2.3.0.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
+        
+       
+    <!--plugins -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="js/ui/jquery.ui.map.js"></script>
+    <script type="text/javascript" src="js/LocalNotification.js"></script>
+
+    <!--custom--> 
+    <script type="text/javascript" src="js/custom.js"></script>
+    
+        
+        
+</head>
+
+
+    
+<body onload="app.bodyLoad()">
+    
+    <div data-role="page">
+        
+        <div data-role="header">
+            
+        </div>
+        
+    
+
+        
+        
+        <div data-role ="content">
+            <div id="map_canvas" style="width:100%;height:400px"></div> <!--MAP! -->
+
+        </div>
+        
+        
+        
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role = "navbar">
+                <ul>
+                    <li><a href="messages.html" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
+                    <li><a href="audio.html" data-corners="true" data-rel="dialog" data-transition="fade" >Audio</a></li>
+                    <li><a href="briefs.html" data-corners="true" data-rel="dialog" data-transition="fade">Briefs</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div><!-- /footer -->
+        
+
+</div>
+
+
+    
+</body>
+</html>
