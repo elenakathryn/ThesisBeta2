@@ -48,11 +48,11 @@
                              $.mobile.loadPage( next + ".html" );
                              // Navigate to next page on swipe left
                              $( document ).on( "swipeleft", page, function() {
-                                              $.mobile.changePage( next + ".html" );
+                                              $.mobile.changePage("#" + next);
                                               });
                              // Navigate to next page when the "next" button is clicked
                              $( ".control .next", page ).on( "click", function() {
-                                                            $.mobile.changePage( next + ".html" );
+                                                            $.mobile.changePage( "#" + next );
                                                             });
                              }
                              // Disable the "next" button if there is no next page
@@ -62,10 +62,10 @@
                              // The same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
                              if ( prev ) {
                              $( document ).on( "swiperight", page, function() {
-                                              $.mobile.changePage( prev + ".html", { reverse: true } );
+                                              $.mobile.changePage( "#" + prev, { reverse: true } );
                                               });
                              $( ".control .prev", page ).on( "click", function() {
-                                                            $.mobile.changePage( prev + ".html", { reverse: true } );
+                                                            $.mobile.changePage( "#" + prev, { reverse: true } );
                                                             });
                              }
                              else {
@@ -168,7 +168,68 @@
     </div><!-- /page -->
         
 
+    <div data-role="page" id="Intro2" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro1" data-next="Intro3">
         
+        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
+        
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /page -->
+
+    <div data-role="page" id="Intro3" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro2" data-next="Intro4">
+        
+        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
+        
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /page -->
+    <div data-role="page" id="Intro4" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro3" data-next="Intro5">
+        
+        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
+        
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /page -->
+    
+    <div data-role="page" id="Intro5" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro4">
+        
+        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
+        
+        
+        <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+            <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
+                
+                <a href="#" class="next" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d">Next</a>
+                <a href="#" class="prev" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d">Previous</a>
+            </div>
+            
+        </div><!-- /footer -->
+        
+    </div><!-- /page -->
 
 
 
