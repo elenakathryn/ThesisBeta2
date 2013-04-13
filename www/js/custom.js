@@ -21,9 +21,9 @@ document.addEventListener("resume", onResume, false);
 
 
 // NOTE TO SELF: REPLACE THE GELOPLOCATION HANDLER!
-$(document).live("pagecreate", function() {
-                 navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-                 });
+//$(document).live("pagecreate", function() {
+//                 navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+//                 });
 
 
 //Geolocaiton Handlers
@@ -71,6 +71,7 @@ function appOpenCounterHandler() {
         localNotification(); 
     } else {
         window.localStorage.setItem("loadCount", 1);
+        alert("This is first load!");
         onFirstLoad();
     }
 }
@@ -189,8 +190,7 @@ function onFirstLoad(){
     //placeholder - this will be the "this app is best experienced with headphones
 
     //Preamble - image fading handled on page itself 
-    $.mobile.changePage( "preamble1.html", { transition: "fade"} );
-    alert ("this is first load!"); 
+    $.mobile.changePage("#Intro1");
     
        // Cut Scene .mp4 of old school msdos style login information & custom alert
     // play audio scene 1
@@ -200,8 +200,6 @@ function onFirstLoad(){
     // set first loacl notification. 
     
 }
-
-
 
 
 // General Population of Assets Handler
@@ -261,7 +259,7 @@ function onDeviceReady() {
 
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
-    alert("you've recived the following number of alerts:" + progressCounter); 
+    alert("you've recived the following number of alerts:" + progressCounter);
 }
 
 
