@@ -8,6 +8,7 @@ var appOpenCount = window.localStorage.getItem("loadCount");
 var progressCounter = window.localStorage.getItem("alertNumber"); 
 
 // Audio player
+//
 var my_media = null;
 var mediaTimer = null;
 
@@ -18,6 +19,8 @@ document.addEventListener("resume", onResume, false);
 
 
 
+
+// NOTE TO SELF: REPLACE THE GELOPLOCATION HANDLER!
 $(document).live("pagecreate", function() {
                  navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
                  });
@@ -58,17 +61,17 @@ function onGeoError(error) {
 }
 
 
-//Local Storage Handlers
+//Local Storage Handler
 //
 
 function appOpenCounterHandler() {
     if (appOpenCount > 0){
         appOpenCount++;
         window.localStorage.setItem("loadCount", appOpenCount);
-        alert(appOpenCount);
+        localNotification(); 
     } else {
-        alert("This is First Launch");
         window.localStorage.setItem("loadCount", 1);
+        onFirstLoad();
     }
 }
 
@@ -105,7 +108,7 @@ function playAudio(src) {
 }
 
 // Pause audio
-//
+
 function pauseAudio() {
     if (my_media) {
         my_media.pause();
@@ -113,7 +116,7 @@ function pauseAudio() {
 }
 
 // Stop audio
-//
+
 function stopAudio() {
     if (my_media) {
         my_media.stop();
@@ -123,20 +126,20 @@ function stopAudio() {
 }
 
 // onSuccess Callback
-//
+
 function onSuccess() {
     console.log("playAudio():Audio Success");
 }
 
 // onError Callback
-//
+
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
 }
 
 // Set audio position
-//
+
 function setAudioPosition(position) {
     document.getElementById('audio_position').innerHTML = position;
 }
@@ -158,7 +161,7 @@ function localNotification(){
                                     showAlert();
                            }
                            });
-    window.localStorage.setItem("alertNumber", 8);
+    window.localStorage.setItem("alertNumber", 1);
 
 }
 
@@ -167,8 +170,6 @@ function localNotification(){
 function alertDismissed(){
     progressCounter = window.localStorage.getItem("alertNumber");
     playAudio("audio/Scene1_mixdown.wav");
-    alert("you just heard:" + progressCounter);
-
 }
 
 function showAlert() {
@@ -181,18 +182,91 @@ function showAlert() {
 }
 
 
-//Execute
+//First Load Sequence
+//
+
+function onFirstLoad(){
+    //placeholder - this will be the "this app is best experienced with headphones
+
+    //Preamble - image fading handled on page itself 
+    $.mobile.changePage( "preamble1.html", { transition: "fade"} );
+    alert ("this is first load!"); 
+    
+       // Cut Scene .mp4 of old school msdos style login information & custom alert
+    // play audio scene 1
+    // Continue?
+    // Breif #1
+    // default to home screen
+    // set first loacl notification. 
+    
+}
+
+
+
+
+// General Population of Assets Handler
+//
+
+function assetPopulation(){
+    
+}
+
+
+//Hander of specific Scene Logic
+//
+
+function secondScene(){
+    
+}
+
+function thirdScene(){
+    
+}
+
+
+function fourthScene(){
+    
+}
+
+function fifthScene(){
+    
+}
+
+function sixthScene(){
+    
+}
+
+function seventhScene(){
+    
+}
+
+
+//Ending
+//
+
+function endCredits(){
+    
+}
+
+
+
+
+//Execution
+//
 
 function onDeviceReady() {
     appOpenCounterHandler();
-    localNotification();
 }
 
 
 function onResume(){
     progressCounter = window.localStorage.getItem("alertNumber");
-    alert(progressCounter);
-    
+    alert("you've recived the following number of alerts:" + progressCounter); 
 }
+
+
+
+
+
 
 
