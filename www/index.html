@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
     
-    <!-- core -->
     <script>
             // Bind to "mobileinit" before you load jquery.mobile.js
             $(document).on( "mobileinit", function() {
                            $.mobile.defaultPageTransition = "fade";
                            });
     </script>
-        
+    
+    <!-- core -->
     <script type="text/javascript" src="cordova-2.3.0.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
@@ -29,52 +29,9 @@
 
     <!--custom--> 
     <script type="text/javascript" src="js/custom.js"></script>
-    
-        <script>
-            
-            
-            $( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
-                             
-                             
-                             var page = "#" + $( this ).attr( "id" ),
-                             // Get the filename of the next page that we stored in the data-next attribute
-                             next = $( this ).jqmData( "next" ),
-                             // Get the filename of the previous page that we stored in the data-prev attribute
-                             prev = $( this ).jqmData( "prev" );
-                             
-                             // Check if we did set the data-next attribute
-                             if ( next ) {
-                             // Prefetch the next page
-                             $.mobile.loadPage( next + ".html" );
-                             // Navigate to next page on swipe left
-                             $( document ).on( "swipeleft", page, function() {
-                                              $.mobile.changePage("#" + next);
-                                              });
-                             // Navigate to next page when the "next" button is clicked
-                             $( ".control .next", page ).on( "click", function() {
-                                                            $.mobile.changePage( "#" + next );
-                                                            });
-                             }
-                             // Disable the "next" button if there is no next page
-                             else {
-                             $( ".control .next", page ).addClass( "ui-disabled" );
-                             }
-                             // The same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
-                             if ( prev ) {
-                             $( document ).on( "swiperight", page, function() {
-                                              $.mobile.changePage( "#" + prev, { reverse: true } );
-                                              });
-                             $( ".control .prev", page ).on( "click", function() {
-                                                            $.mobile.changePage( "#" + prev, { reverse: true } );
-                                                            });
-                             }
-                             else {
-                             $( ".control .prev", page ).addClass( "ui-disabled" );
-                             }
-                             });
-            </script>
         
         <style>
+            
             /* Set the background image sources */
             #Intro1 { background-image: url(img/intro/Scene1.png); }
             #Intro2 { background-image: url(img/intro/Scene2.png); }
@@ -113,9 +70,7 @@
                 -o-user-select: none;
                 user-select: none;
             }
-            </style>
-
-        
+        </style> 
         
 </head>
 
@@ -144,9 +99,9 @@
         <div data-role="footer" data-position="fixed">
             <div data-role = "navbar">
                 <ul>
-                    <li><a href="messages.html" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
-                    <li><a href="audio.html" data-corners="true" data-rel="dialog" data-transition="fade" >Audio</a></li>
-                    <li><a href="briefs.html" data-corners="true" data-rel="dialog" data-transition="fade">Briefs</a></li>
+                    <li><a href="#messages" data-corners="true" data-rel="dialog" data-transition="fade" >Messages</a></li>
+                    <li><a href="#audio" data-corners="true" data-rel="dialog" data-transition="fade" >Audio</a></li>
+                    <li><a href="#briefs" data-corners="true" data-rel="dialog" data-transition="fade">Briefs</a></li>
                 </ul>
             </div><!-- /navbar -->
         </div><!-- /footer -->
@@ -170,9 +125,6 @@
 
     <div data-role="page" id="Intro2" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro1" data-next="Intro3">
         
-        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
-        
-        
         <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
             <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
                 
@@ -186,7 +138,6 @@
 
     <div data-role="page" id="Intro3" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro2" data-next="Intro4">
         
-        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
         
         
         <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
@@ -201,9 +152,6 @@
     </div><!-- /page -->
     <div data-role="page" id="Intro4" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro3" data-next="Intro5">
         
-        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
-        
-        
         <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
             <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
                 
@@ -216,10 +164,7 @@
     </div><!-- /page -->
     
     <div data-role="page" id="Intro5" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="Intro4">
-        
-        <!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
-        
-        
+
         <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
             <div data-role="controlgroup" class="control ui-btn-right" data-type="vertical" data-mini="true">
                 
@@ -230,9 +175,68 @@
         </div><!-- /footer -->
         
     </div><!-- /page -->
+    
+    <div data-role="page" id="breakVid" class="demo-page" data-theme="a">
+       <video id = "video" width="100%" height="100%" autoplay >
+            <source src="img/breakvideo3.m4v" type="video/mp4">
+        </video>
+        
+    </div> <!-- /page -->
+    
+    
+    <div data-role="page" id="messages">
+        
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Messages</h1>
+        </div>
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <div class = "textMessage" id = "textMessage1">
+                <p> ALERT : Sand storms through the city middle grounds. Reminders: Do not enter the dust if you can avoid it. Immediately pull any vehicle to the side of the road. Stay down and cover your eyes and mouth. Inhalation of substantial dust should be treated immediately. Once the storm has passed, check your transmitter for full functionality.
+                Stay connected, stay safe. Heed warnings.
+                </p>
+            </div> 
+            
+        </div>
+        
+    </div> <!-- /page -->
+
+    
+    <div data-role="page" id = "audio">
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Audio</h1>
+        </div>
+        
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <a href="#" class="btn large" onclick="playAudio('audio/Scene1_mixdown.wav');">Play Audio</a>
+            <a href="#" class="btn large" onclick="pauseAudio();">Pause Playing Audio</a>
+            <a href="#" class="btn large" onclick="stopAudio();">Stop Playing Audio</a>
+            <p id="audio_position"></p>
+            
+        </div>
+    </div><!-- /page -->
 
 
-
+    <div data-role="page" id = "briefs">
+        <div class="ui-header ui-bar-a" role="banner"><a href="index.html" class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-notext ui-btn-up-a" data-icon="delete" data-iconpos="notext" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a" title="Close"><span class="ui-btn-inner"><span class="ui-btn-text">Close</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>
+            <h1 class="ui-title" role="heading" aria-level="1">Briefs</h1>
+        </div>
+        
+        <div data-role="content" class="ui-content ui-body-c" role="main">
+            <div class = "briefSection" id = "brief1" >
+                <h1> #1238 </h1>
+                <img id = "mayorLogo" src = "img/logos/mayorlogo.png" height = "42px" width = "42px">
+                    <p> Today, we would remind you of our collective efforts to rebuild, reemploy and reconstitute ourselves as a nation. While our efforts to establish a solid infrastructure within the city have taken many steps forward in the last few years, we have not yet reached our goals. The storms continue to challenge our construction and renewal efforts.
+                        We all must re-dedicate ourselves daily, but with a critical eye towards our actions’ value. Consider the broad implications of how you choose to contribute to our collective goals. Enabling the antiquated behaviors of pre-storm society benefit none but the weak.
+                        In the upcoming days, we will be releasing updates on the Council’s progress on several important initiatives, including the Survey of Downed Power Distribution Networks and updates to the credits afforded in the Domiciliary Act. We look forward to updating you on our growth.
+                        I remain the city’s humblest servant. </p>
+                <img id = "mayorSig" src="img/signatures/fultonstokes.png" height = "50px" width = "70px">
+            </div> <!--/brief1--> 
+        
+        </div> <!--/content-->
+    </div><!--/page--> 
+    
     
 </body>
 </html>

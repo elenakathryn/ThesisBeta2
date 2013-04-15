@@ -6,11 +6,15 @@ var appOpenCount = window.localStorage.getItem("loadCount");
 
 // Story Progress Counter
 var progressCounter = window.localStorage.getItem("alertNumber"); 
+var alertNumber; 
 
 // Audio player
 //
 var my_media = null;
 var mediaTimer = null;
+
+var page; 
+
 
 
 
@@ -18,12 +22,57 @@ document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("resume", onResume, false);
 
 
+//first load swipe handlers 
+$( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
+                 
+                 
+                page = "#" + $( this ).attr( "id" ),
+                 // Get the filename of the next page that we stored in the data-next attribute
+                 next = $( this ).jqmData( "next" ),
+                 // Get the filename of the previous page that we stored in the data-prev attribute
+                 prev = $( this ).jqmData( "prev" );
+                 
+                 // Check if we did set the data-next attribute
+                 if ( next ) {
+                 // Prefetch the next page
+                 $.mobile.loadPage( next + ".html" );
+                 // Navigate to next page on swipe left
+                 $( document ).on( "swipeleft", page, function() {
+                                  $.mobile.changePage("#" + next);
+                                  });
+                 // Navigate to next page when the "next" button is clicked
+                 $( ".control .next", page ).on( "click", function() {
+                                                $.mobile.changePage( "#" + next );
+                                                });
+                 }
+                 // Disable the "next" button if there is no next page
+                 else {
+                 $( ".control .next", page ).addClass( "ui-disabled" );
+                 }
+                 // The same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
+                 if ( prev ) {
+                 $( document ).on( "swiperight", page, function() {
+                                  $.mobile.changePage( "#" + prev, { reverse: true } );
+                                  });
+                 $( ".control .prev", page ).on( "click", function() {
+                                                $.mobile.changePage( "#" + prev, { reverse: true } );
+                                                });
+                 }
+                 else {
+                 $( ".control .prev", page ).addClass( "ui-disabled" );
+                 }
+                 
+                 if (page == "#Intro5"){
+                    window.setTimeout('playVideo()', 6000);
+                 }
+                 
+                 });
 
 
 // NOTE TO SELF: REPLACE THE GELOPLOCATION HANDLER!
 //$(document).live("pagecreate", function() {
-//                 navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
-//                 });
+  //               navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+    //             });
 
 
 //Geolocaiton Handlers
@@ -68,10 +117,8 @@ function appOpenCounterHandler() {
     if (appOpenCount > 0){
         appOpenCount++;
         window.localStorage.setItem("loadCount", appOpenCount);
-        localNotification(); 
     } else {
         window.localStorage.setItem("loadCount", 1);
-        alert("This is first load!");
         onFirstLoad();
     }
 }
@@ -147,30 +194,41 @@ function setAudioPosition(position) {
 
 
 
-//Custom Local Notification Handlers
-//
 
-function localNotification(){
-    window.addNotification({
-                           fireDate        : Math.round(new Date().getTime()/1000 + 10),
-                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
-                           repeatInterval  : "0",
-                           soundName       : "horn.caf",
-                           badge           : 0,
-                           notificationId  : 1,
-                           callBack        : function(notificationId){
-                                    showAlert();
-                           }
-                           });
-    window.localStorage.setItem("alertNumber", 1);
+//Content Population
 
+function firstAlertDismissed(){
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    $.mobile.changePage("#audio"); 
+    playAudio("audio/Scene"+progressCounter+"_mixdown.wav");
+    
+    var currentPos = my_media.getCurrentPosition();
+    var mediaLength = my_media.getDuration();
+    
+    if (currentPos >= mediaLength){
+        $.mobile.changePage("#briefs");
+        loadContent1(); 
+    }
+
+    
 }
 
-//Custom alerts
+function showFirstAlert() {
+    navigator.notification.alert(
+                                 'You now have access to Etta Wheatons Transmitter',  // message
+                                 firstAlertDismissed,         // callback
+                                 'Access Granted',            // title
+                                 'Listen'                  // button Name
+                                 );
+}
 
 function alertDismissed(){
+    
     progressCounter = window.localStorage.getItem("alertNumber");
-    playAudio("audio/Scene1_mixdown.wav");
+    $.mobile.changePage("#audio");
+    playAudio("audio/Scene"+progressCounter+"_mixdown.wav");
+    
 }
 
 function showAlert() {
@@ -183,6 +241,55 @@ function showAlert() {
 }
 
 
+
+function loadContent1(){
+    progressCounter = window.localStorage.getItem("alertNumber");
+    document.getElementById('textMessage1').style.display = 'block';
+    document.getElementById('brief1').style.display = 'block';
+
+}
+
+//Custom Local Notification Handlers
+//
+
+function firstLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 13),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 1,
+                           callBack        : function(notificationId){
+                                    showFirstAlert();
+                           }
+                           });
+    alertNumber= 1;
+    window.localStorage.setItem("alertNumber", alertNumber);
+    loadContent1();
+
+}
+
+function secondLocalNotification(){
+    window.addNotification({
+                           fireDate        : Math.round(new Date().getTime()/1000 + 60),
+                           alertBody       : "You now have access to Etta Wheaton's Transmitter",
+                           repeatInterval  : "0",
+                           soundName       : "horn.caf",
+                           badge           : 0,
+                           notificationId  : 2,
+                           callBack        : function(notificationId){
+                                    showAlert(); 
+                           }
+                           });
+    alertNumber = 2;
+    window.localStorage.setItem("alertNumber", alertNumber);
+
+}
+
+
+
+
 //First Load Sequence
 //
 
@@ -191,52 +298,20 @@ function onFirstLoad(){
 
     //Preamble - image fading handled on page itself 
     $.mobile.changePage("#Intro1");
-    
-       // Cut Scene .mp4 of old school msdos style login information & custom alert
-    // play audio scene 1
-    // Continue?
-    // Breif #1
-    // default to home screen
-    // set first loacl notification. 
-    
+    alertNumber = 0;
 }
 
 
-// General Population of Assets Handler
-//
 
-function assetPopulation(){
-    
+function playVideo(){
+    $.mobile.changePage("#breakVid");
+    firstLocalNotification(); 
+    var video = document.getElementById("video");
+    video.addEventListener('ended', function() {
+                           $.mobile.changePage("#home");
+                           });
 }
 
-
-//Hander of specific Scene Logic
-//
-
-function secondScene(){
-    
-}
-
-function thirdScene(){
-    
-}
-
-
-function fourthScene(){
-    
-}
-
-function fifthScene(){
-    
-}
-
-function sixthScene(){
-    
-}
-
-function seventhScene(){
-    
-}
 
 
 //Ending
@@ -254,6 +329,12 @@ function endCredits(){
 
 function onDeviceReady() {
     appOpenCounterHandler();
+    
+    progressCounter = window.localStorage.getItem("alertNumber");
+    if (progressCounter > 0){
+        loadContent1();
+    }
+    
 }
 
 
